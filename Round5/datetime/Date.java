@@ -5,19 +5,16 @@ public class Date {
     private final int month;
     private final int day;
     
-    static boolean isLeapYear(int year) {
-    // Karkausvuosi: jaollinen 4:llä ja ei jaollinen 100:lla tai jaollinen 400:lla.
-    // Javan loogisaritmeettiset operaatiot ja return-lause kuin C-kielessä.
+    private static boolean isLeapYear(int year) {
     return (year % 4 == 0) && ((year % 100 != 0) || (year % 400 == 0));
     }
 
-    static int[][] mDays = {{31, 31}, {28, 29}, {31, 31}, {30, 30}, {31, 31}, {30, 30},
+    private static int[][] mDays = {{31, 31}, {28, 29}, {31, 31}, {30, 30}, {31, 31}, {30, 30},
                           {31, 31}, {31, 31}, {30, 30}, {31, 31}, {30, 30}, {31, 31}};
     
-    static int monthDays(int month, int year) {
+    private static int monthDays(int month, int year) {
     int days = -1;
     if(1 <= month && month <= 12) {
-      // Ehdollinen operaattori kuin C-kielessä.
       days = isLeapYear(year) ? mDays[month-1][1] : mDays[month-1][0];
     }
     return days;
