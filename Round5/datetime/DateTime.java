@@ -1,8 +1,4 @@
 
-import java.util.Date;
-
-
-
 public class DateTime extends Date {
     private final int hour;
     private final int minute;
@@ -16,7 +12,7 @@ public class DateTime extends Date {
         if(hour < 0 || hour > 23 ||
                 minute < 0 || minute > 59 ||
                 second < 0 || second > 59){
-            throw new DateException(String.format("Illegal time %d:%d%d%n",
+            throw new DateException(String.format("Illegal time %02d:%02d:%02d",
                     hour, minute, second));
         }
 
@@ -38,8 +34,8 @@ public class DateTime extends Date {
     }
     
     public String toString(){
-        return super.toString() + String.format("%2s"+ "." + "%2s" + "." + "s",
-            Integer.toString(hour), Integer.toString(minute), Integer.toString(second));
+        return super.toString() +" " + String.format("%02d"+ ":" + "%02d" + ":" + "%02d",
+            hour, minute, second);
     }
     
 }

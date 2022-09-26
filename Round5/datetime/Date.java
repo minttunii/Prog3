@@ -1,18 +1,17 @@
 
-
 public class Date {
     private final int year;
     private final int month;
     private final int day;
     
-    private static boolean isLeapYear(int year) {
+    static boolean isLeapYear(int year) {
     return (year % 4 == 0) && ((year % 100 != 0) || (year % 400 == 0));
     }
 
-    private static int[][] mDays = {{31, 31}, {28, 29}, {31, 31}, {30, 30}, {31, 31}, {30, 30},
+    static final int[][] mDays = {{31, 31}, {28, 29}, {31, 31}, {30, 30}, {31, 31}, {30, 30},
                           {31, 31}, {31, 31}, {30, 30}, {31, 31}, {30, 30}, {31, 31}};
     
-    private static int monthDays(int month, int year) {
+    static int monthDays(int month, int year) {
     int days = -1;
     if(1 <= month && month <= 12) {
       days = isLeapYear(year) ? mDays[month-1][1] : mDays[month-1][0];
@@ -21,8 +20,8 @@ public class Date {
   }
 
     public Date(int year, int month, int day) throws DateException {
-        if((1 <= day) && (day <= monthDays(month, year))){
-            throw new DateException(String.format("Illegal date %2d.%2d.%d%n", 
+        if(!((1 <= day) && (day <= monthDays(month, year)))){
+            throw new DateException(String.format("Illegal date %02d.%02d.%02d", 
                     day, month, year));
         }
         
@@ -44,8 +43,8 @@ public class Date {
     }
     
     public String toString(){
-        String date = String.format("%2s"+ "." + "%2s" + "." + "s",
-                Integer.toString(day), Integer.toString(month), Integer.toString(year));
+        String date = String.format("%02d"+ "." + "%02d" + "." + "%02d",
+                day, month, year);
         return date;
     }
 }
