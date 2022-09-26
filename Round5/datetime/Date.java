@@ -4,14 +4,14 @@ public class Date {
     private final int month;
     private final int day;
     
-    static boolean isLeapYear(int year) {
+    private static boolean isLeapYear(int year) {
     return (year % 4 == 0) && ((year % 100 != 0) || (year % 400 == 0));
     }
 
-    static final int[][] mDays = {{31, 31}, {28, 29}, {31, 31}, {30, 30}, {31, 31}, {30, 30},
+    private static final int[][] mDays = {{31, 31}, {28, 29}, {31, 31}, {30, 30}, {31, 31}, {30, 30},
                           {31, 31}, {31, 31}, {30, 30}, {31, 31}, {30, 30}, {31, 31}};
     
-    static int monthDays(int month, int year) {
+    private static int monthDays(int month, int year) {
     int days = -1;
     if(1 <= month && month <= 12) {
       days = isLeapYear(year) ? mDays[month-1][1] : mDays[month-1][0];
