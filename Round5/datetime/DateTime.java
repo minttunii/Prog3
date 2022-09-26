@@ -4,9 +4,6 @@ import java.util.Date;
 
 
 public class DateTime extends Date {
-    private final int year;
-    private final int month;
-    private final int day;
     private final int hour;
     private final int minute;
     private final int second;
@@ -14,16 +11,15 @@ public class DateTime extends Date {
     public DateTime(int year, int month, int day, int hour, int minute,
             int second) throws DateException {
         
+        super(year, month, day);
+        
         if(hour < 0 || hour > 23 ||
                 minute < 0 || minute > 59 ||
                 second < 0 || second > 59){
             throw new DateException(String.format("Illegal time %d:%d%d%n",
                     hour, minute, second));
         }
-        
-        this.year = year;
-        this.month = month;
-        this.day = day;
+
         this.hour = hour;
         this.minute = minute;
         this.second = second;
