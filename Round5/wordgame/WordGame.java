@@ -42,23 +42,25 @@ public class WordGame {
     
     public boolean isGameActive(){
         if(gamestate != null){
-            if(gamestate.mistakes > gamestate.mistake_limit 
-                    || gamestate.missing_chars == 0){
-                return false;
-            }
+            return !(gamestate.mistakes > gamestate.mistake_limit ||
+                    gamestate.missing_chars == 0);
         }
-        return gamestate != null;
+        
+        else{
+            return gamestate != null;
+        }
+   
     }
     
     public WordGameState getGameState() throws GameStateException{
-        if(gamestate == null){
+        if(gamestate == null || !this.isGameActive()){
             throw new GameStateException("There is currently no active word game!");
         }
         return gamestate; 
     }
     
     public WordGameState guess(char c) throws GameStateException{
-        if(gamestate == null){
+        if(gamestate == null || !this.isGameActive()){
             throw new GameStateException("There is currently no active word game!");
         }
       
@@ -101,7 +103,7 @@ public class WordGame {
     }
     
     public WordGameState guess(String word) throws GameStateException{
-        if(gamestate == null){
+        if(gamestate == null || !this.isGameActive()){
             throw new GameStateException("There is currently no active word game!");
         }     
         if(word.equals(word_to_guess)){
