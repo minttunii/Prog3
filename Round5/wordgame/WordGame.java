@@ -111,10 +111,10 @@ public class WordGame {
     
 
     public static class WordGameState {
-        private String word_guess = " ";
-        private int mistakes = 0;
-        private int mistake_limit = 0;
-        private int missing_chars = 0;
+        private String word_guess;
+        private int mistakes;
+        private int mistake_limit;
+        private int missing_chars;
         
         public String getWord(){
             return word_guess;
