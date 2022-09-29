@@ -8,7 +8,6 @@ import java.util.Scanner;
 public class WordGame {
     private WordGameState gamestate;
     private final ArrayList<String> game_words;
-    private ArrayList<Character> guessed_chars = new ArrayList<>();
     private String word_to_guess;
     
     public WordGame(String wordFilename) {
@@ -29,7 +28,6 @@ public class WordGame {
     
     public void initGame(int wordIndex, int mistakeLimit){
         this.gamestate = new WordGameState();
-        
         int N = game_words.size(); // Number of words
         String word = game_words.get(wordIndex%N);
         this.word_to_guess = word;
@@ -44,12 +42,10 @@ public class WordGame {
         if(gamestate != null){
             return !(gamestate.mistakes > gamestate.mistake_limit ||
                     gamestate.missing_chars == 0);
-        }
-        
+        } 
         else{
             return gamestate != null;
         }
-   
     }
     
     public WordGameState getGameState() throws GameStateException{
@@ -63,14 +59,12 @@ public class WordGame {
         if(gamestate == null || !this.isGameActive()){
             throw new GameStateException("There is currently no active word game!");
         }
-      
         boolean is_char_in_word = false;
-        char c2 = Character.toLowerCase(c); 
-        char[] word_guess = gamestate.word_guess.toCharArray();
-     
-        // If char has already been guessed
-        if(guessed_chars.contains(c2)){
-            if(gamestate.mistakes == gamestate.mistake_limit){ 
+        char c2 = Character.toLowerCase(c);
+        
+        // If char has already been guessed in game
+        if(gamestate.guessed_chars.contains(c2)){ 
+            if(gamestate.mistakes == gamestate.mistake_limit){
                 gamestate.word_guess = word_to_guess;
                 gamestate.mistakes += 1;
             }
@@ -79,18 +73,17 @@ public class WordGame {
             }
             return gamestate;
         }
+  
+        char[] word_guess = gamestate.word_guess.toCharArray();
         for(int i = 0; i < word_to_guess.length(); i++){
             if(word_to_guess.charAt(i) == c2){
                 is_char_in_word = true;
-                guessed_chars.add(c2);
+                gamestate.guessed_chars.add(c2);
                 word_guess[i] = c2;
                 gamestate.missing_chars -= 1;
             }
         }
-        if(is_char_in_word){
-            gamestate.word_guess = String.valueOf(word_guess);
-        }
-        else{  
+        if(!is_char_in_word){
             if(gamestate.mistakes == gamestate.mistake_limit){ 
                 gamestate.word_guess = word_to_guess;
                 gamestate.mistakes += 1;
@@ -99,6 +92,10 @@ public class WordGame {
                 gamestate.mistakes += 1;
             }
         }
+        else{  
+             gamestate.word_guess = String.valueOf(word_guess);
+        }
+   
         return gamestate;
     }
     
@@ -128,12 +125,14 @@ public class WordGame {
         private int mistakes;
         private int mistake_limit;
         private int missing_chars;
+        private ArrayList<Character> guessed_chars;
 
         private WordGameState() {
             this.word_guess = " ";
             this.mistakes = 0;
             this.mistake_limit = 0;
             this.missing_chars = 0;
+            this.guessed_chars = new ArrayList<>();
         }
    
         public String getWord(){
