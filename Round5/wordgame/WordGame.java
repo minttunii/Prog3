@@ -41,6 +41,12 @@ public class WordGame {
     }
     
     public boolean isGameActive(){
+        if(gamestate != null){
+            if(gamestate.mistakes > gamestate.mistake_limit 
+                    || gamestate.missing_chars == 0){
+                return false;
+            }
+        }
         return gamestate != null;
     }
     
@@ -55,13 +61,20 @@ public class WordGame {
         if(gamestate == null){
             throw new GameStateException("There is currently no active word game!");
         }
+      
         boolean is_char_in_word = false;
         char c2 = Character.toLowerCase(c); 
         char[] word_guess = gamestate.word_guess.toCharArray();
-        
+     
         // If char has already been guessed
         if(guessed_chars.contains(c2)){
-            gamestate.mistakes += 1;
+            if(gamestate.mistakes == gamestate.mistake_limit){ 
+                gamestate.word_guess = word_to_guess;
+                gamestate.mistakes += 1;
+            }
+            else{
+                gamestate.mistakes += 1;
+            }
             return gamestate;
         }
         for(int i = 0; i < word_to_guess.length(); i++){
@@ -72,17 +85,17 @@ public class WordGame {
                 gamestate.missing_chars -= 1;
             }
         }
-        if(!is_char_in_word){  
-            if(gamestate.mistakes == gamestate.mistake_limit){
+        if(is_char_in_word){
+            gamestate.word_guess = String.valueOf(word_guess);
+        }
+        else{  
+            if(gamestate.mistakes == gamestate.mistake_limit){ 
                 gamestate.word_guess = word_to_guess;
-                gamestate.mistakes += 1;  
+                gamestate.mistakes += 1;
             }
             else{
-               gamestate.mistakes += 1;   
+                gamestate.mistakes += 1;
             }
-        }
-        else if(is_char_in_word){
-            gamestate.word_guess = String.valueOf(word_guess);
         }
         return gamestate;
     }
@@ -90,12 +103,10 @@ public class WordGame {
     public WordGameState guess(String word) throws GameStateException{
         if(gamestate == null){
             throw new GameStateException("There is currently no active word game!");
-        }
-        
+        }     
         if(word.equals(word_to_guess)){
             gamestate.word_guess = word;
-            gamestate.missing_chars = 0;
-            gamestate = null;
+            gamestate.missing_chars = 0;           
         }
         else{    
             if(gamestate.mistakes == gamestate.mistake_limit){ 
@@ -115,7 +126,14 @@ public class WordGame {
         private int mistakes;
         private int mistake_limit;
         private int missing_chars;
-        
+
+        private WordGameState() {
+            this.word_guess = " ";
+            this.mistakes = 0;
+            this.mistake_limit = 0;
+            this.missing_chars = 0;
+        }
+   
         public String getWord(){
             return word_guess;
         }
