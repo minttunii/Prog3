@@ -88,20 +88,20 @@ public class Dates{
                         if(Integer.parseInt(dateparts2[0]) < MIN_YEARS ||
                                 Integer.parseInt(dateparts2[0]) > MAX_YEARS
                                 || dateparts2[1].length() < 2 || dateparts2[2].length()< 2){
-                            throw new DateTimeException("The date " + dateStr + " is illegal!");
+                            throw new DateTimeException("The date \"" + dateStr + "\" is illegal!");
                         }
                         valid_dates.add(localdate2);                     
                     }
                     else{ 
                         if(Integer.parseInt(dateparts[2]) < MIN_YEARS || Integer.parseInt(dateparts[2]) > MAX_YEARS){
-                            throw new DateTimeException("The date " + dateStr + " is illegal!");
+                            throw new DateTimeException("The date \"" + dateStr + "\" is illegal!");
                         }
                         LocalDate localdate = LocalDate.of(Integer.parseInt(dateparts[2]),
                             Integer.parseInt(dateparts[1]), Integer.parseInt(dateparts[0]));
                         valid_dates.add(localdate);
                     } 
                 } catch (DateTimeException e) {
-                        System.out.println("The date " + dateStr + " is illegal!");
+                        System.out.format("The date \"%s\" is illegal!%n", dateStr);
                 }
             }
             
