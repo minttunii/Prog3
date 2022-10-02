@@ -7,7 +7,7 @@ public class Circle implements IShapeMetrics{
     }
     
     public String toString(){
-        return "Circle with radius: " + radius;
+        return String.format("Circle with radius: %.2f", radius);
     }
     
     @Override
@@ -17,12 +17,12 @@ public class Circle implements IShapeMetrics{
     
     @Override
     public double area(){
-        return Math.pow(IShapeMetrics.PI, 2) * radius;
+        return Math.pow(radius, 2) * IShapeMetrics.PI;
     }
     
     @Override
     public double circumference(){
-        return 2* IShapeMetrics.PI * radius;
+        return 2 * IShapeMetrics.PI * radius;
     }
     
    

@@ -9,7 +9,7 @@ public class Rectangle implements IShapeMetrics{
     }
     
     public String toString(){
-        return "Rectangle with height " + height + " and widht " + width;
+        return String.format("Rectangle with height %.2f and widht %.2f", height, width);
     }
 
     @Override
