@@ -12,7 +12,7 @@ public class Circle implements IShapeMetrics{
     
     @Override
     public String name(){
-        return "cirle";
+        return "circle";
     }
     
     @Override
