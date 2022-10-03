@@ -7,7 +7,7 @@ public class Attainment implements Comparable<Attainment>{
     private final String studentNumber;
     private final int grade;
     public static final Comparator<Attainment> CODE_STUDENT_CMP = Comparator.comparing(Attainment::getCourseCode).thenComparing(Attainment::getStudentNumber);
-    public static final Comparator<Attainment> CODE_GRADE_CMP = Comparator.comparing(Attainment::getCourseCode).thenComparing(Attainment::getGrade);
+    public static final Comparator<Attainment> CODE_GRADE_CMP = Comparator.comparing(Attainment::getCourseCode).thenComparing(Attainment::getGrade, Comparator.reverseOrder());
 
     public Attainment(String courseCode, String studentNumber, int grade) {
         this.courseCode = courseCode;
