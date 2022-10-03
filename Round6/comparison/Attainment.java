@@ -2,7 +2,7 @@
 import java.util.Comparator;
 
 
-public class Attainment implements Comparable<Attainment>, Comparator<Attainment>{
+public class Attainment implements Comparable<Attainment>{
     private final String courseCode;
     private final String studentNumber;
     private final int grade;
@@ -40,15 +40,6 @@ public class Attainment implements Comparable<Attainment>, Comparator<Attainment
         }
         return cmp;
     }  
-    
-    @Override
-    public int compare(Attainment a, Attainment b){
-        int cmp = CODE_STUDENT_CMP.compare(a, b);
-        if(cmp == 0){
-            cmp = CODE_GRADE_CMP.compare(a, b);
-        }
-        return cmp;
-    }
     
 }
    
