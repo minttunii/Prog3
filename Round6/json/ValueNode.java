@@ -3,6 +3,7 @@
 public class ValueNode extends Node {
     private double number;
     private boolean bool;
+    private boolean boolchanged = false;
     private String string;
     
     ValueNode(double value){  
@@ -10,7 +11,8 @@ public class ValueNode extends Node {
     }
     
     ValueNode(boolean value){ 
-        this.bool = value; 
+        this.bool = value;
+        this.boolchanged = true;
     }
     
     ValueNode(String value){
@@ -30,7 +32,7 @@ public class ValueNode extends Node {
     }
     
     public boolean isBoolean(){
-        return !isNumber() && !isString() ;
+        return boolchanged == true || bool == true;
     }
     
     public double getNumber(){
