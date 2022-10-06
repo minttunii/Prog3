@@ -30,7 +30,7 @@ public class ValueNode extends Node {
     }
     
     public boolean isBoolean(){
-        return !isNumber() && ! isString() && !isNull();
+        return !isNumber() && !isString() ;
     }
     
     public double getNumber(){
