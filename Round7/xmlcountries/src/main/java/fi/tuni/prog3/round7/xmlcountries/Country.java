@@ -36,7 +36,7 @@ public class Country implements Comparable<Country>{
         return String.format("%s%n"
                 + "  Area: %.1f km2%n"
                 + "  Population: %d%n"
-                + "  GDP: %.1f (2015 USD)",
+                + "  GDP: %.1f (2015 USD)%n",
                 name, area, population, GDP);
     }
     
