@@ -2,6 +2,7 @@
 package fi.tuni.prog3.round7.xmlcountries;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -175,8 +176,10 @@ public class CountryData {
                 country.addContent(new Element("gdp").setText("" + c.getGdp()));
                 doc.getRootElement().addContent(country);
             }
-            XMLOutputter xout = new XMLOutputter(Format.getPrettyFormat());
-            xout.output(doc, System.out);
+            XMLOutputter xmlOutputter = new XMLOutputter();
+            xmlOutputter.setFormat(Format.getPrettyFormat());
+            FileOutputStream output = new FileOutputStream(countryFile);
+            xmlOutputter.output(doc, output);
             
         } catch (JDOMException | IOException ex) {
             Logger.getLogger(CountryData.class.getName()).log(Level.SEVERE, null, ex);
