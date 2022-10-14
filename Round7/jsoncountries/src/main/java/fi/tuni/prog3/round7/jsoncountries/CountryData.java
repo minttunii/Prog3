@@ -38,27 +38,35 @@ public class CountryData {
             JsonElement fileElement = JsonParser.parseReader(new FileReader(input));
             JsonObject fileObject = fileElement.getAsJsonObject();
             
-            JsonArray records = fileObject.get("records").getAsJsonArray();
-            for(JsonElement record : records){
-                JsonArray fields = record.getAsJsonObject().get("field").getAsJsonArray();
-                for(JsonElement field : fields){
-                    JsonObject fieldobject = field.getAsJsonObject();
-                    String name = fieldobject.get("attributes").getAsJsonObject().get("name").getAsString();
-                    String countryname = " ";
-                    if("Country or Area".equals(name)){
-                        countryname = fieldobject.get("value").getAsString();
-                        list.add(new Country(countryname));
-                    }
-                    if("Value".equals(name)){
-                        for(Country c : list){
-                            if(countryname.equals(c.getName())){
-                                double area = fieldobject.get("value").getAsDouble();
-                                c.setArea(area);
-                            }
-                        }
+            
+            JsonArray record = fileObject.getAsJsonObject("Root")
+                    .getAsJsonObject("data")
+                    .getAsJsonArray("record");
+
+            for (JsonElement element : record) {
+
+                JsonElement itnext = element.getAsJsonObject().get("field");
+                JsonArray itnextArray = itnext.getAsJsonArray();
+
+                String nimi = itnextArray.get(0).getAsJsonObject().get("value").getAsString();
+                String area = itnextArray.get(2).getAsJsonObject().get("value").getAsString();
+
+
+                boolean exists = false;
+                for (Country x : list) {
+                    if (nimi.equals(x.getName())) {
+                        exists = true;
+                        x.setArea(Double.parseDouble(area));
                     }
                 }
-            }   } catch (FileNotFoundException ex) {
+                if (!exists) {
+                    Country x = new Country(nimi);
+                    x.setArea(Double.parseDouble(area));
+                    list.add(x);
+
+                }
+
+            } } catch (FileNotFoundException ex) {
             Logger.getLogger(CountryData.class.getName()).log(Level.SEVERE, null, ex);
         }
     
@@ -66,86 +74,83 @@ public class CountryData {
 
     
     private static void readPopulationFile(String populationFile, List<Country> list){
-        
-        try {
+       try {
             File input = new File(populationFile);
             JsonElement fileElement = JsonParser.parseReader(new FileReader(input));
             JsonObject fileObject = fileElement.getAsJsonObject();
             
-            JsonArray records = fileObject.get("records").getAsJsonArray();
-            for(JsonElement record : records){
-                JsonArray fields = record.getAsJsonObject().get("field").getAsJsonArray();
-                for(JsonElement field : fields){
-                    JsonObject fieldobject = field.getAsJsonObject();
-                    String name = fieldobject.get("attributes").getAsJsonObject().get("name").getAsString();
-                    String countryname = " ";
-                    if("Country or Area".equals(name)){
-                        countryname = fieldobject.get("value").getAsString();
-                        boolean exists = false;
-                        for(Country c : list){
-                            if(countryname.equals(c.getName())){
-                                exists = true;
-                                break;
-                            }
-                        }
-                        if(!exists){
-                            list.add(new Country(countryname));
-                        }
-                        
-                    }
-                    if("Value".equals(name)){
-                        for(Country c : list){
-                            if(countryname.equals(c.getName())){
-                                long population = fieldobject.get("value").getAsLong();
-                                c.setPopulation(population);
-                            }
-                        }
+            
+            JsonArray record = fileObject.getAsJsonObject("Root")
+                    .getAsJsonObject("data")
+                    .getAsJsonArray("record");
+
+            for (JsonElement element : record) {
+
+                JsonElement itnext = element.getAsJsonObject().get("field");
+                JsonArray itnextArray = itnext.getAsJsonArray();
+
+                String nimi = itnextArray.get(0).getAsJsonObject().get("value").getAsString();
+                String pop = itnextArray.get(2).getAsJsonObject().get("value").getAsString();
+
+
+                boolean exists = false;
+                for (Country x : list) {
+                    if (nimi.equals(x.getName())) {
+                        exists = true;
+                        x.setPopulation(Long.parseLong(pop));
                     }
                 }
-            }   } catch (FileNotFoundException ex) {
+                if (!exists) {
+                    Country x = new Country(nimi);
+                    x.setPopulation(Long.parseLong(pop));
+                    list.add(x);
+
+                }
+
+            } } catch (FileNotFoundException ex) {
             Logger.getLogger(CountryData.class.getName()).log(Level.SEVERE, null, ex);
         }
+    
     }
     
     private static void readGdpFile(String gdpFile, List<Country> list){
-        try {
+       try {
             File input = new File(gdpFile);
             JsonElement fileElement = JsonParser.parseReader(new FileReader(input));
             JsonObject fileObject = fileElement.getAsJsonObject();
-            JsonArray records = fileObject.get("records").getAsJsonArray();
             
-            for(JsonElement record : records){
-                JsonArray fields = record.getAsJsonObject().get("field").getAsJsonArray();
-                for(JsonElement field : fields){
-                    JsonObject fieldobject = field.getAsJsonObject();
-                    String name = fieldobject.get("attributes").getAsJsonObject().get("name").getAsString();
-                    String countryname = " ";
-                    if("Country or Area".equals(name)){
-                        countryname = fieldobject.get("value").getAsString();
-                        boolean exists = false;
-                        for(Country c : list){
-                            if(countryname.equals(c.getName())){
-                                exists = true;
-                                break;
-                            }
-                        }
-                        if(!exists){
-                            list.add(new Country(countryname));
-                        }
-                        
-                    }
-                    if("Value".equals(name)){
-                        for(Country c : list){
-                            if(countryname.equals(c.getName())){
-                                double gdp = fieldobject.get("value").getAsDouble();
-                                c.setGDP(gdp);
-                            }
-                        }
+            
+            JsonArray record = fileObject.getAsJsonObject("Root")
+                    .getAsJsonObject("data")
+                    .getAsJsonArray("record");
+
+            for (JsonElement element : record) {
+
+                JsonElement itnext = element.getAsJsonObject().get("field");
+                JsonArray itnextArray = itnext.getAsJsonArray();
+
+                String nimi = itnextArray.get(0).getAsJsonObject().get("value").getAsString();
+                String gdp = itnextArray.get(2).getAsJsonObject().get("value").getAsString();
+
+
+                boolean exists = false;
+                for (Country x : list) {
+                    if (nimi.equals(x.getName())) {
+                        exists = true;
+                        x.setGDP(Double.parseDouble(gdp));
                     }
                 }
-            }   } catch (FileNotFoundException ex) {
+                if (!exists) {
+                    Country x = new Country(nimi);
+                    x.setArea(Double.parseDouble(gdp));
+                    list.add(x);
+
+                }
+
+            } } catch (FileNotFoundException ex) {
             Logger.getLogger(CountryData.class.getName()).log(Level.SEVERE, null, ex);
         }
+    
     }
     
     public static void writeToJson(List<Country> countries, String countryFile){
