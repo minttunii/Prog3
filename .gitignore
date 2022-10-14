@@ -3,4 +3,8 @@
 *.txt
 *.Class
 *.mf
+/Round4/studentregister/build.xml
+/Round7.1/
 
+/Round7/xmlcountries/target/
+/Round7/jsoncountries/target/
