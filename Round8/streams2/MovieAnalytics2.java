@@ -33,8 +33,8 @@ public class MovieAnalytics2 {
         // Sort map first by value in decending orger the by name
         // Only n first items are printed
         x.entrySet().stream().sorted(Map.Entry.<String, Integer>comparingByValue().reversed()
-                .thenComparing(Map.Entry.comparingByKey())).limit(n).
-                forEach(a -> System.out.format("%s: %d movies%n", a.getKey(), a.getValue()));
+                .thenComparing(Map.Entry.comparingByKey())).limit(n)
+                .forEach(a -> System.out.format("%s: %d movies%n", a.getKey(), a.getValue()));
         
     }
     
@@ -44,8 +44,8 @@ public class MovieAnalytics2 {
                 Collectors.averagingInt(Movie::getDuration)));
         // Sort map by average and then by genre
         x.entrySet().stream().sorted(Map.Entry.<String, Double>comparingByValue()
-                .thenComparing(Map.Entry.comparingByKey())).
-                forEach(a -> System.out.format("%s: %.2f%n", a.getKey(), a.getValue()));
+                .thenComparing(Map.Entry.comparingByKey()))
+                .forEach(a -> System.out.format("%s: %.2f%n", a.getKey(), a.getValue()));
         
   
     }
@@ -56,8 +56,8 @@ public class MovieAnalytics2 {
                 Collectors.averagingDouble(Movie::getScore)));
         // Sort map by average then by genre
         x.entrySet().stream().sorted(Map.Entry.<String, Double>comparingByValue().reversed()
-                .thenComparing(Map.Entry.comparingByKey())).
-                forEach(a -> System.out.format("%s: %.2f%n", a.getKey(), a.getValue()));
+                .thenComparing(Map.Entry.comparingByKey()))
+                .forEach(a -> System.out.format("%s: %.2f%n", a.getKey(), a.getValue()));
         
     }
     
