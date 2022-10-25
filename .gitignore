@@ -8,3 +8,6 @@
 
 /Round7/xmlcountries/target/
 /Round7/jsoncountries/target/
+/Round7/jsoncountries/src/main/java/CountryTest.java
+*.json
+*.xml
