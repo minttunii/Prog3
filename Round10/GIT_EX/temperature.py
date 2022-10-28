@@ -9,7 +9,7 @@ def main():
 
 
     print("{} C = {} F".format(input_temp, t_transform(input_temp, 'c')))
-    print("{} C = {} F".format(input_temp, t_transform(input_temp, 'f')))
+    print("{} F = {} C".format(input_temp, t_transform(input_temp, 'f')))
 
 
 
