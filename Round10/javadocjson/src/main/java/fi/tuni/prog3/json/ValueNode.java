@@ -4,8 +4,6 @@ package fi.tuni.prog3.json;
 /**
  * A class for representing a JSON value. The value can be either a double,
  * a boolean, a String or null.
- * 
- * 
  */
 
 final class ValueNode extends Node {
