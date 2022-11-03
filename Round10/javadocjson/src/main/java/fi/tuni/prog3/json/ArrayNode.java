@@ -8,7 +8,7 @@ import java.util.Iterator;
  * A class for representing a JSON array.
  */
 
-final class ArrayNode extends Node implements Iterable<Node> {
+public final class ArrayNode extends Node implements Iterable<Node> {
     private ArrayList<Node> arraynode;
     
     /**
