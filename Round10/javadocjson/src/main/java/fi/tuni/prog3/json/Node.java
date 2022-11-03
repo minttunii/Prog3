@@ -23,14 +23,6 @@ public abstract class Node {
     }
     
     /**
-     * Checks whether this node represents a JSON value.
-     * @return true if this node represents a JSON value, otherwise false.
-     */
-    public boolean isValue() {
-      return this instanceof ValueNode;
-    }
-
-    /**
      * Checks whether this node represents a JSON array.
      * @return true if this node represents a JSON array, otherwise false.
      */
@@ -38,4 +30,11 @@ public abstract class Node {
       return this instanceof ArrayNode;
     }
 
+    /**
+     * Checks whether this node represents a JSON value.
+     * @return true if this node represents a JSON value, otherwise false.
+     */
+    public boolean isValue() {
+      return this instanceof ValueNode;
+    }
 }
