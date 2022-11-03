@@ -19,19 +19,19 @@ public final class ArrayNode extends Node implements Iterable<Node> {
     }
     
     /**
-     * Adds a new JSON node to the end of this JSON array.
-     * @param node - the new JSON node to be added. 
-     */
-    public void add(Node node){
-        arraynode.add(node);
-    }
-    
-    /**
      * Returns the number of JSON nodes stored in this JSON array.
      * @return the number of JSON nodes in this JSON array.
      */
     public int size(){
         return arraynode.size();
+    }
+    
+    /**
+     * Adds a new JSON node to the end of this JSON array.
+     * @param node - the new JSON node to be added. 
+     */
+    public void add(Node node){
+        arraynode.add(node);
     }
     
     /**

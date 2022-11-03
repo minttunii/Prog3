@@ -19,6 +19,14 @@ public final class ObjectNode extends Node implements Iterable<String>{
     }
     
     /**
+     * Returns the number of JSON nodes stored under this JSON object.
+     * @return the number of JSON nodes under this JSON object.
+     */
+    public int size(){
+        return 0;
+    }
+    
+    /**
      * Returns the JSON node stored under the given name.
      * @param name - the name of the name-node pair whose node should be returned.
      * @return the JSON node corresponding to name, or null if such node does not exist.
@@ -40,14 +48,6 @@ public final class ObjectNode extends Node implements Iterable<String>{
      */
     public void set(String name, Node node){
         jsonObject.put(name, node);
-    }
-    
-    /**
-     * Returns the number of JSON nodes stored under this JSON object.
-     * @return the number of JSON nodes under this JSON object.
-     */
-    public int size(){
-        return 0;
     }
     
     /**

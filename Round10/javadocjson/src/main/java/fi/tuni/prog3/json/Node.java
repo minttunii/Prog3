@@ -15,6 +15,14 @@ public abstract class Node {
     }
     
     /**
+     * Checks whether this node represents a JSON object.
+     * @return true if this node represents a JSON object, otherwise false.
+     */
+    public boolean isObject() {
+      return this instanceof ObjectNode;
+    }
+    
+    /**
      * Checks whether this node represents a JSON value.
      * @return true if this node represents a JSON value, otherwise false.
      */
@@ -28,14 +36,6 @@ public abstract class Node {
      */
     public boolean isArray() {
       return this instanceof ArrayNode;
-    }
-    
-    /**
-     * Checks whether this node represents a JSON object.
-     * @return true if this node represents a JSON object, otherwise false.
-     */
-    public boolean isObject() {
-      return this instanceof ObjectNode;
     }
 
 }

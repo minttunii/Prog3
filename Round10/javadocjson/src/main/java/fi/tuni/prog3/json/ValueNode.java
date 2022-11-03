@@ -46,6 +46,14 @@ public final class ValueNode extends Node {
     }
     
     /**
+     * Checks whether this value node stores a boolean value.
+     * @return true if this node stores a boolean value, otherwise false.
+     */
+    public boolean isBoolean(){
+        return boolchanged == true || bool == true;
+    }
+    
+    /**
      * Checks whether this value node stores a string.
      * @return true if this node stores a string, otherwise false.
      */
@@ -62,20 +70,21 @@ public final class ValueNode extends Node {
     }
     
     /**
-     * Checks whether this value node stores a boolean value.
-     * @return true if this node stores a boolean value, otherwise false.
-     */
-    public boolean isBoolean(){
-        return boolchanged == true || bool == true;
-    }
-    
-    /**
      * Returns the stored value as a number (double).
      * @return the stored number as a double value.
      * @throws IllegalStateException - if the stored value is not a number.
      */
     public double getNumber() throws IllegalStateException{
         return number;
+    }
+    
+     /**
+     * Returns the stored value as a boolean value.
+     * @return the stored boolean value.
+     * @throws IllegalStateException - if the stored value is not a boolean value.
+     */
+    public boolean getBoolean() throws IllegalStateException{
+        return bool;
     }
     
     /**
@@ -85,15 +94,6 @@ public final class ValueNode extends Node {
      */
     public String getString() throws IllegalStateException{
         return string;
-    }
-    
-    /**
-     * Returns the stored value as a boolean value.
-     * @return the stored boolean value.
-     * @throws IllegalStateException - if the stored value is not a boolean value.
-     */
-    public boolean getBoolean() throws IllegalStateException{
-        return bool;
     }
     
     /**
