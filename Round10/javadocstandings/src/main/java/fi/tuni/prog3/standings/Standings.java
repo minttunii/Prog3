@@ -38,7 +38,7 @@ public class Standings {
     
     /**
      * Constructs a Team object for storing statistics of the named team.
-     * @param name - the name of the team whose statistics the new team object stores.
+     * @param name the name of the team whose statistics the new team object stores.
      */
     public Team(String name){this.name = name;}
     
@@ -50,7 +50,7 @@ public class Standings {
     
     /**
      * Returns the number of wins of the team.
-     * @return he number of wins of the team.
+     * @return the number of wins of the team.
      */
     public int getWins(){return wins;}
     
@@ -104,8 +104,8 @@ public class Standings {
      * read from the specified file. The result is identical to first 
      * constructing an empty Standing object and then calling
      * {@link #readMatchData(java.lang.String) readMatchData(filename)}.
-     * @param filename - the name of the game data file to read.
-     * @throws IOException - if there is some kind of an IO error (e.g. if the
+     * @param filename  the name of the game data file to read.
+     * @throws IOException  if there is some kind of an IO error (e.g. if the
      * specified file does not exist).
      */
     public Standings(String filename) throws IOException{
@@ -125,8 +125,8 @@ public class Standings {
      * E.g. the line "Iceland\t3-2\tFinland" would describe a match between 
      * Iceland and Finland where Iceland scored 3 and Finland 2 goals.
      * </p>
-     * @param filename - the name of the game data file to read.
-     * @throws IOException - if there is some kind of an IO error (e.g. if the specified file does not exist).
+     * @param filename the name of the game data file to read.
+     * @throws IOException if there is some kind of an IO error (e.g. if the specified file does not exist).
      */
     public final void readMatchData(String filename) throws IOException{
         try{
@@ -155,10 +155,10 @@ public class Standings {
     /**
      * Updates the team statistics and standings according to the match result 
      * described by the parameters.
-     * @param teamNameA - the name of the first ("home") team.
-     * @param goalsA - the number of goals scored by the first team.
-     * @param goalsB - the number of goals scored by the second team.
-     * @param teamNameB - the name of the second ("away") team.
+     * @param teamNameA the name of the first ("home") team.
+     * @param goalsA the number of goals scored by the first team.
+     * @param goalsB the number of goals scored by the second team.
+     * @param teamNameB the name of the second ("away") team.
      */
     public void addMatchResult(String teamNameA, int goalsA, int goalsB,
             String teamNameB){
@@ -230,7 +230,7 @@ public class Standings {
     
     /**
      * Prints a formatted standings table to the provided output stream.
-     * @param out - the output stream to use when printing the standings table.
+     * @param out the output stream to use when printing the standings table.
      */
     public void printStandings(PrintStream out){
         List<Team> teamlist = this.getTeams();
