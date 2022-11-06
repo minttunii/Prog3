@@ -38,7 +38,7 @@ public class AttainmentTest {
             Attainment attainment = new Attainment("COMP.CS.140", "12345", -1);
         });
 
-        String expectedMessage = "Illegal argument";
+        String expectedMessage = "Invalid course code, student number or grade!";
         String actualMessage = exception.getMessage();
         System.out.println(actualMessage);
         assertTrue(actualMessage.contains(expectedMessage));
