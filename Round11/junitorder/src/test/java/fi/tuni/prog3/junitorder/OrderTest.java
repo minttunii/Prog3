@@ -31,7 +31,22 @@ public class OrderTest {
     @AfterEach
     public void tearDown() {
     }
+    
+    @Test
+    public void whenExceptionThrown() {
+        System.out.println("whenExceptionThrown");
+        Exception exception;
+        Order instance = new Order();
+        exception = assertThrows(IllegalArgumentException.class, () -> {
+            instance.addItems(new Order.Item("Apple", 0.50), -4);
+        });
 
+        String expectedMessage = "Invalid unit count";
+        String actualMessage = exception.getMessage();
+        System.out.println(actualMessage);
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+    
     /**
      * Test of addItems method, of class Order.
      */
@@ -55,6 +70,7 @@ public class OrderTest {
         String name = "Apple";
         int count = 1;
         Order instance = new Order();
+        instance.addItems(new Order.Item("Apple", 0.50), 5); 
         boolean expResult = true;
         boolean result = instance.addItems(name, count);
         assertEquals(expResult, result);
@@ -134,6 +150,4 @@ public class OrderTest {
         boolean result = instance.removeItems(name, count);
         assertEquals(expResult, result);
     }
-    
-    
 }
