@@ -94,6 +94,38 @@ public class OrderTest {
         assertTrue(actualMessage.contains(expectedMessage));
     }
     
+    @Test
+    public void testremoveElements_IllegalArgument() {
+        System.out.println("whenExceptionThrown");
+        Exception exception;
+        Order instance = new Order();
+        instance.addItems(new Order.Item("Apple", 0.50), 5); 
+        exception = assertThrows(IllegalArgumentException.class, () -> {
+            instance.removeItems("Apple", -1);
+        });
+
+        String expectedMessage = "Illegal argument: -1";
+        String actualMessage = exception.getMessage();
+        System.out.println(actualMessage);
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+    
+    @Test
+    public void testremoveElements_UnkownElement() {
+        System.out.println("whenExceptionThrown");
+        Exception exception;
+        Order instance = new Order();
+        instance.addItems(new Order.Item("Apple", 0.50), 5); 
+        exception = assertThrows(IllegalArgumentException.class, () -> {
+            instance.removeItems("Orange", 1);
+        });
+
+        String expectedMessage = "No such element: Orange";
+        String actualMessage = exception.getMessage();
+        System.out.println(actualMessage);
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+    
     /**
      * Test of addItems method, of class Order.
      */
