@@ -53,7 +53,7 @@ public class OrderTest {
     public void testAddItems_String_int() {
         System.out.println("addItems");
         String name = "Apple";
-        int count = 0;
+        int count = 1;
         Order instance = new Order();
         boolean expResult = true;
         boolean result = instance.addItems(name, count);
@@ -67,7 +67,7 @@ public class OrderTest {
     public void testGetEntries() {
         System.out.println("getEntries");
         Order instance = new Order();
-        List<Order.Entry> expResult = null;
+        List<Order.Entry> expResult = new ArrayList<>();
         List<Order.Entry> result = instance.getEntries();
         assertEquals(expResult, result);
     }
@@ -129,6 +129,7 @@ public class OrderTest {
         String name = "Apple";
         int count = 1;
         Order instance = new Order();
+        instance.addItems(new Order.Item("Apple", 0.50), 5); 
         boolean expResult = true;
         boolean result = instance.removeItems(name, count);
         assertEquals(expResult, result);
