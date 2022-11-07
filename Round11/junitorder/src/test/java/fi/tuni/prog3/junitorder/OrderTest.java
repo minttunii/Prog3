@@ -3,6 +3,7 @@ package fi.tuni.prog3.junitorder;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,7 +35,7 @@ public class OrderTest {
     
     @Test
     public void testAddItems_OrderItem_int_IllegalArgument() {
-        System.out.println("whenExceptionThrown");
+        System.out.println("AddItems_OrderItem_int_IllegalArgument");
         Exception exception;
         Order instance = new Order();
         exception = assertThrows(IllegalArgumentException.class, () -> {
@@ -49,11 +50,11 @@ public class OrderTest {
     
     @Test
     public void testAddItems_OrderItem_int_IllegalState() {
-        System.out.println("whenExceptionThrown");
+        System.out.println("AddItems_OrderItem_int_IllegalState");
         Exception exception;
         Order instance = new Order();
         instance.addItems(new Order.Item("Apple", 0.50), 5); 
-        exception = assertThrows(IllegalArgumentException.class, () -> {
+        exception = assertThrows(IllegalStateException.class, () -> {
             instance.addItems(new Order.Item("Apple", 0.50), -4);
         });
 
@@ -65,10 +66,10 @@ public class OrderTest {
     
     @Test
     public void testAddItems_String_int_UnknownItem() {
-        System.out.println("whenExceptionThrown");
+        System.out.println("AddItems_String_int_UnknownItem");
         Exception exception;
         Order instance = new Order();
-        exception = assertThrows(IllegalArgumentException.class, () -> {
+        exception = assertThrows(NoSuchElementException.class, () -> {
             instance.addItems("Apple", 4);
         });
 
@@ -80,7 +81,7 @@ public class OrderTest {
     
     @Test
     public void testAddItems_String_int_IllegalArgument() {
-        System.out.println("whenExceptionThrown");
+        System.out.println("AddItems_String_int_IllegalArgument");
         Exception exception;
         Order instance = new Order();
         instance.addItems(new Order.Item("Apple", 0.50), 5); 
@@ -96,7 +97,7 @@ public class OrderTest {
     
     @Test
     public void testremoveElements_IllegalArgument() {
-        System.out.println("whenExceptionThrown");
+        System.out.println("removeElements_IllegalArgument");
         Exception exception;
         Order instance = new Order();
         instance.addItems(new Order.Item("Apple", 0.50), 5); 
@@ -104,7 +105,7 @@ public class OrderTest {
             instance.removeItems("Apple", -1);
         });
 
-        String expectedMessage = "Illegal argument: -1";
+        String expectedMessage = "Illegal item unit count: -1";
         String actualMessage = exception.getMessage();
         System.out.println(actualMessage);
         assertTrue(actualMessage.contains(expectedMessage));
@@ -116,11 +117,39 @@ public class OrderTest {
         Exception exception;
         Order instance = new Order();
         instance.addItems(new Order.Item("Apple", 0.50), 5); 
-        exception = assertThrows(IllegalArgumentException.class, () -> {
+        exception = assertThrows(NoSuchElementException.class, () -> {
             instance.removeItems("Orange", 1);
         });
 
         String expectedMessage = "No such element: Orange";
+        String actualMessage = exception.getMessage();
+        System.out.println(actualMessage);
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+    
+    @Test
+    public void testItemConstructorExecptionThrown() {
+        System.out.println("ItemConstructorExecptionThrown");
+        Exception exception;
+        exception = assertThrows(IllegalArgumentException.class, () -> {
+            Order.Item item = new Order.Item(null, 1);
+        });
+
+        String expectedMessage = "Illegal argument: null";
+        String actualMessage = exception.getMessage();
+        System.out.println(actualMessage);
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+    
+    @Test
+    public void testEntryConstructorExecptionThrown() {
+        System.out.println("EntryConstructorExecptionThrown");
+        Exception exception;
+        exception = assertThrows(IllegalArgumentException.class, () -> {
+            Order.Entry entry = new Order.Entry(new Order.Item("Apple", 2), -1);
+        });
+
+        String expectedMessage = "Illegal argument: -1";
         String actualMessage = exception.getMessage();
         System.out.println(actualMessage);
         assertTrue(actualMessage.contains(expectedMessage));
@@ -230,4 +259,6 @@ public class OrderTest {
         boolean result = instance.removeItems(name, count);
         assertEquals(expResult, result);
     }
+    
+    
 }
