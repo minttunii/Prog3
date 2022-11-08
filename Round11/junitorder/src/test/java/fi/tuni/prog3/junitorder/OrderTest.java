@@ -84,12 +84,11 @@ public class OrderTest {
         System.out.println("AddItems_String_int_IllegalArgument");
         Exception exception;
         Order instance = new Order();
-        instance.addItems(new Order.Item("Apple", 0.50), 5); 
-        exception = assertThrows(java.lang.IllegalArgumentException.class, () -> {
-            instance.addItems(new Order.Item("Apple", 1.50), 2);
+        exception = assertThrows(IllegalArgumentException.class, () -> {
+            instance.addItems(new Order.Item("Apple", 0.50), -2);
         });
 
-        String expectedMessage = "Illegal state";
+        String expectedMessage = "Illegal item unit count: -2";
         String actualMessage = exception.getMessage();
         System.out.println(actualMessage);
         assertTrue(actualMessage.contains(expectedMessage));
@@ -128,14 +127,28 @@ public class OrderTest {
     }
     
     @Test
-    public void testItemConstructorExecptionThrown() {
-        System.out.println("ItemConstructorExecptionThrown");
+    public void testItemIllegalName() {
+        System.out.println("ItemIllegalName");
         Exception exception;
         exception = assertThrows(IllegalArgumentException.class, () -> {
             Order.Item item = new Order.Item(null, 1);
         });
 
         String expectedMessage = "Illegal item name: null";
+        String actualMessage = exception.getMessage();
+        System.out.println(actualMessage);
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+    
+    @Test
+    public void testItemIllegalPrice() {
+        System.out.println("ItemIllegalName");
+        Exception exception;
+        exception = assertThrows(IllegalArgumentException.class, () -> {
+            Order.Item item = new Order.Item("Apple", -2);
+        });
+
+        String expectedMessage = "Illegal item price: -2";
         String actualMessage = exception.getMessage();
         System.out.println(actualMessage);
         assertTrue(actualMessage.contains(expectedMessage));
