@@ -34,27 +34,27 @@ public class OrderTest {
     }
     
     @Test
-    public void testAddItems_OrderItem_int_IllegalArgument() {
-        System.out.println("AddItems_OrderItem_int_IllegalArgument");
+    public void testAddItems_OrderItem_int_IllegalState() {
+        System.out.println("AddItems_OrderItem_int_IllegalState");
         Exception exception;
         Order instance = new Order();
-        exception = assertThrows(IllegalArgumentException.class, () -> {
-            instance.addItems(new Order.Item("Apple", 0.50), -4);
+        instance.addItems(new Order.Item("Apple", 0.50), 5); 
+        exception = assertThrows(IllegalStateException.class, () -> {
+            instance.addItems(new Order.Item("Apple", 1.50), 4);
         });
 
-        String expectedMessage = "Illegal item unit count: -4";
+        String expectedMessage = "The added item and an existing item have different prices!";
         String actualMessage = exception.getMessage();
         System.out.println(actualMessage);
         assertTrue(actualMessage.contains(expectedMessage));
     }
     
     @Test
-    public void testAddItems_OrderItem_int_IllegalState() {
-        System.out.println("AddItems_OrderItem_int_IllegalState");
+    public void testAddItems_OrderItem_int_IllegalArgument() {
+        System.out.println("AddItems_OrderItem_int_IllegalArgument");
         Exception exception;
         Order instance = new Order();
-        instance.addItems(new Order.Item("Apple", 0.50), 5); 
-        exception = assertThrows(java.lang.IllegalStateException.class, () -> {
+        exception = assertThrows(IllegalArgumentException.class, () -> {
             instance.addItems(new Order.Item("Apple", 0.50), -4);
         });
 
@@ -96,8 +96,8 @@ public class OrderTest {
     }
     
     @Test
-    public void testremoveElements_IllegalArgument() {
-        System.out.println("removeElements_IllegalArgument");
+    public void testremoveItems_IllegalArgument() {
+        System.out.println("removeItems_IllegalArgument");
         Exception exception;
         Order instance = new Order();
         instance.addItems(new Order.Item("Apple", 0.50), 5); 
@@ -113,7 +113,7 @@ public class OrderTest {
     
     @Test
     public void testremoveElements_UnkownElement() {
-        System.out.println("removeElements_UnkownElement");
+        System.out.println("removeItems_UnkownElement");
         Exception exception;
         Order instance = new Order();
         instance.addItems(new Order.Item("Apple", 0.50), 5); 
