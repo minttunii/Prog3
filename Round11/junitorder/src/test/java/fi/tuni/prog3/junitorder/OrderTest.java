@@ -142,13 +142,13 @@ public class OrderTest {
     
     @Test
     public void testItemIllegalPrice() {
-        System.out.println("ItemIllegalName");
+        System.out.println("ItemIllegalPrice");
         Exception exception;
         exception = assertThrows(IllegalArgumentException.class, () -> {
-            Order.Item item = new Order.Item("Apple", -2);
+            Order.Item item = new Order.Item("Apple", -2.0);
         });
 
-        String expectedMessage = "Illegal item price: -2";
+        String expectedMessage = "Illegal negative item price: -2.0";
         String actualMessage = exception.getMessage();
         System.out.println(actualMessage);
         assertTrue(actualMessage.contains(expectedMessage));
